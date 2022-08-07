@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const ApiError = require("../error/ApiError");
+const userRepo = require("../repositories/user-repo");
 
 const generateJwt = (uid) => {
   const expiresIn = process.env.EXPIRES_IN;
@@ -14,11 +15,11 @@ const generateJwt = (uid) => {
 };
 class AuthService {
   async register({ email, password, nickname }) {
-    const candidate = await userRepo.findByEmail(email);
+    // const candidate = await userRepo.findByEmail(email);
 
-    if (candidate) {
-      throw ApiError.badRequest("Пользователь с таким email уже существует");
-    }
+    // if (candidate) {
+    //   throw ApiError.badRequest("Пользователь с таким email уже существует");
+    // }
 
     if (!email || !password || !nickname) {
       throw ApiError.badRequest("Неверный email или пароль");

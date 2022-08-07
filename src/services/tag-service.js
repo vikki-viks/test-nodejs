@@ -1,3 +1,5 @@
+const tagRepo = require("../repositories/tag-repo");
+
 class TagService {
   async createTag({ userId, name, sortOrder }) {
     const tag = await tagRepo.create({ userId, name, sortOrder });

@@ -1,3 +1,5 @@
+const userRepo = require("../repositories/user-repo");
+
 class UserService {
   async editUser({ id, email, password, nickname }) {
     const user = await userRepo.update({ id, email, password, nickname });

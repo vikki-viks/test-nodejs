@@ -1,3 +1,6 @@
+const userTagRepo = require("../repositories/user-tag-repo");
+const tagRepo = require("../repositories/tag-repo");
+
 class UserTagService {
   async createUserTags({ tags }) {
     for (const tagId of tags) {
