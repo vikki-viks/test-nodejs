@@ -50,6 +50,11 @@ class AuthService {
 
     return generateJwt(user.id);
   }
+
+  async identify(token) {
+    const { uid } = jwt.verify(token, process.env.SECRET_KEY);
+    return uid;
+  }
 }
 
 module.exports = new AuthService();

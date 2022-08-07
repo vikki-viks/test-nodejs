@@ -1,27 +1,36 @@
-const uuid = require("uuid");
-const path = require("path");
-const ApiError = require("../error/ApiError");
 const userService = require("../services/user-service");
+const authService = require("../services/auth-service");
 
 class UserController {
-  async getAll(req, res) {
-    const { email, nickname, tags } = req.body;
-    const mappedRolls = await rollsService.getAll({
-      typeId,
-      limit,
-      page,
+  async editUser(req, res) {
+    const token = req.headers.Authorization.split(" ")[1];
+    const id = authService.identify(token);
+    const { email, password, nickname } = req.body;
+    const user = await userService.editUser({
+      id,
+      email,
+      password,
+      nickname,
     });
-    return res.json(mappedRolls);
+    return res.json(user);
   }
 
   async getUser(req, res) {
-    const { email, nickname, tags } = req.body;
+    const token = req.headers.Authorization.split(" ")[1];
+    const id = authService.identify(token);
     const user = await userService.getUser({
-      email,
-      nickname,
-      tags,
+      id,
     });
-    return res.json(rolls);
+    return res.json(user);
+  }
+
+  async deleteUser(req, res) {
+    const token = req.headers.Authorization.split(" ")[1];
+    const id = authService.identify(token);
+    const user = await userService.deleteUser({
+      id,
+    });
+    return res.json(user);
   }
 }
 
